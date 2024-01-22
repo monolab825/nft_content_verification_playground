@@ -1,10 +1,8 @@
 # NFT Based Content Authenticity & Verification System
-This project is a blockchain-based framework that focuses on enhancing the authenticity and credibility of content shared on social networks. Leveraging non-fungible tokens (NFTs), this project provides a solution for evaluating the authenticity of social media content.
+This is a playground for testing the  [content authenticity verification framework]([https://ikiu.ac.ir/](https://github.com/mohroba/nft_content_verification))
 
 ## Features
-- Implementing ITokens, CTokens, and VTokens for identity, content, and verification management.
-- Integration with blockchain technology for decentralized and transparent operations.
-- Adaptable for various social media platforms.
+Each contract has a dedicated html and js file that forms a simple interface to interact with contracts.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -14,6 +12,8 @@ To test these on your own custom chain or a test-net , you need to deploy the Co
 - Node.js
 - NPM (Node Package Manager)
 - Hardhat
+
+Also remember that playground works with any Web3 supported wallet (Metamask preferred).
 
 ## Acknowledgments
 
