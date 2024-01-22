@@ -1,0 +1,57 @@
+/* styles.css */
+
+/* Global Styles */
+body {
+    font-family: IranSansWeb,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa; /* Light gray background */
+}
+
+header, footer {
+    background-color: #ffffff; /* White background */
+}
+
+/* Main Content Styles */
+main {
+    background-color: #ffffff; /* White background for main content */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Tabs Styles */
+.nav-tabs {
+    margin-bottom: 20px;
+}
+
+.nav-link {
+    font-size: 18px;
+    font-weight: 500;
+    color: #343a40; /* Dark gray text */
+}
+
+.nav-link.active {
+    background-color: #007bff; /* Primary color for active tab */
+    color: #ffffff; /* White text for active tab */
+}
+
+/* Form Styles */
+form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Status Container Styles */
+#nftDetails, #mintingStatus, #updateStatus {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #dee2e6; /* Light gray border */
+    border-radius: 8px;
+}
+
+h2{
+    text-align: center;
+    margin-bottom: 50px;
+    border-bottom: 2px solid gray;
+    padding-bottom: 10px;
+}

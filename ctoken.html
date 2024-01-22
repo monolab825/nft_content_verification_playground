@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html direction="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>آزمایشگاه توکن محتوا</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <link href="styles.css" rel="stylesheet"/>
+
+</head>
+<body style="direction: rtl;">
+<header class="bg-light text-center p-3">
+    <h1>آزمایشگاه توکن محتوا</h1>
+    <div id="currentAccount"></div>
+</header>
+<main class="container mt-3">
+    <div class="bg-dark text-light" id="statusBar" style="
+          margin: 10px;
+          padding: 10px;
+          min-height: 50px;
+          border-radius: 10px;
+          direction: ltr;
+        "></div>
+    <div class="d-flex" style="flex-direction: row-reverse;justify-content: space-around;">
+        <div class="list-group" id="mainTabs">
+            <a class="list-group-item list-group-item-action active" data-bs-toggle="tab" href="#mint" id="mint-tab">ایجاد توکن</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#burn" id="burn-tab">سوزاندن توکن</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#transfer" id="transfer-tab">انتقال توکن</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#royalty" id="royalty-tab">مدیریت فروش شخص ثالث</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#contentRights" id="content-rights-tab">حقوق محتوا</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#metadata" id="metadata-tab">فراداده توکن</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#batchTransfer" id="batch-transfer-tab">انتقال دسته‌ای</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#batchMint" id="batch-mint-tab">مینت دسته‌ای</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#batchBurn" id="batch-burn-tab">سوزاندن دسته‌ای</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#curation" id="curation-tab">متعادل سازی محتوا</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#sale" id="sale-tab">فروش توکن</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#grantRole" id="grantRole-tab">تخصیص نقش</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#revokeRole" id="revokeRole-tab">لغو نقش</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="tab" href="#displayTokenData" id="displayTokenData-tab">نمایش اطلاعات توکن</a>
+        </div>
+
+        <div class="tab-content m-3 flex-grow-1">
+            <div class="tab-pane fade show active" id="mint">
+                <h2 class="mt-3">ایجاد توکن</h2>
+                <form id="mintForm">
+                    <div class="mb-3">
+                        <label class="form-label" for="mintToAddress">آدرس گیرنده:</label>
+                        <input class="form-control" id="mintToAddress" placeholder="0x..." type="text"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="mintToAddress">شناسه توکن هویت :</label>
+                        <input class="form-control" id="mintToItokenId" min="0" placeholder="" type="number"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="mintTokenId">شناسه توکن:</label>
+                        <input class="form-control" id="mintTokenId" min="0" type="number"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="mintAmount">مقدار:</label>
+                        <input class="form-control" id="mintAmount" min="1" type="number"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="mintData">دیتا (اختیاری):</label>
+                        <input class="form-control" id="mintData" type="text"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="mintAmount">میزان دستمزد فروش ثانویه (رویالتی):</label>
+                        <input class="form-control" id="royaltyAmount" max="100" min="0" type="number"/>
+                    </div>
+                    <button class="btn btn-primary" onclick="mintWithVerification()" type="button">ایجاد توکن</button>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="burn">
+                <h2 class="mt-3">سوزاندن توکن</h2>
+                <form id="burnForm" >
+                    <div class="mb-3">
+                        <label class="form-label" for="burnTokenId">شناسه توکن:</label>
+                        <input class="form-control" id="burnTokenId" min="0" type="number"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="burnAmount">مقدار:</label>
+                        <input class="form-control" id="burnAmount" min="1" type="number"/>
+                    </div>
+                    <button type="button" class="btn btn-danger" onclick="burnToken()">سوزاندن توکن</button>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="transfer">
+                <h2 class="mt-3">انتقال توکن</h2>
+                <form id="transferForm">
+                    <div class="mb-3">
+                        <label class="form-label" for="transferToAddress">آدرس گیرنده:</label>
+                        <input class="form-control" id="transferToAddress" placeholder="0x..." type="text"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="transferTokenId">شناسه توکن:</label>
+                        <input class="form-control" id="transferTokenId" min="0" type="number"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="transferAmount">مقدار:</label>
+                        <input class="form-control" id="transferAmount" min="1" type="number"/>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="transferToken()">انتقال توکن</button>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="royalty">
+                <h2 class="mt-3">مدیریت فروش شخص ثالث</h2>
+                <form id="royaltyForm">
+                    <div class="mb-3">
+                        <label class="form-label" for="royaltyTokenId">شناسه توکن:</label>
+                        <input class="form-control" id="royaltyTokenId" min="0" type="number"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="royaltyReceiver">آدرس دریافت‌کننده:</label>
+                        <input class="form-control" id="royaltyReceiver" placeholder="0x..." type="text"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="royaltyPercentage">درصد رویالتی:</label>
+                        <input class="form-control" id="royaltyPercentage" max="100" min="0" type="number"/>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="updateRoyaltyInfo()">مدیریت فروش شخص ثالث</button>
+                </form>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="contentRights">
+                <h2 class="mt-3">حقوق محتوا</h2>
+                <form id="contentRightsForm" onsubmit="setContentRights(); return false;">
+                    <div class="mb-3">
+                        <label class="form-label" for="contentRightsTokenId">شناسه توکن:</label>
+                        <input class="form-control" id="contentRightsTokenId" min="0" type="number"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="contentRights">حقوق محتوا:</label>
+                        <textarea class="form-control" id="contentRights" rows="4"></textarea>
+                    </div>
+                    <button class="btn btn-primary" type="button" onclick="setContentRights()">
+                        تنظیم حقوق محتوا
+                    </button>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="metadata">
+                <h2 class="mt-3">فراداده توکن</h2>
+                <form id="metadataForm">
+                    <div class="mb-3">
+                        <label class="form-label" for="metadataTokenId">شناسه توکن:</label>
+                        <input class="form-control" id="metadataTokenId" min="0" type="number"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="metadataURI">آدرس جدید فراداده:</label>
+                        <input class="form-control" id="metadataURI" type="text"/>
+                    </div>
+                    <button class="btn btn-primary" type="button" onclick="updateTokenURI()">
+                        به‌روزرسانی آدرس فراداده
+                    </button>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="batchTransfer">
+                <h2 class="mt-3">انتقال دسته‌ای</h2>
+                <form id="transferForm" >
+                    <div class="mb-3">
+                        <label class="form-label" for="batchTransferRecipients">آدرس‌های گیرنده (جداشده با
+                            کاما):</label>
+                        <input class="form-control" id="batchTransferRecipients" placeholder="0x..., 0x..., ..."
+                               type="text"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="batchTransferIds">شناسه توکن ها (جداشده با کاما):</label>
+                        <input class="form-control" id="batchTransferIds" placeholder="1, 2, ..." type="text"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="batchTransferAmounts">مقادیر توکن (جداشده با کاما):</label>
+                        <input class="form-control" id="batchTransferAmounts" placeholder="10, 20, ..." type="text"/>
+                    </div>
+                    <button class="btn btn-primary" type="button" onclick="batchTransfer()">
+                        انتقال دسته‌ای
+                    </button>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="batchMint">
+                <h2 class="mt-3">مینت دسته‌ای</h2>
+                <form id="batchMintForm">
+
+                    <div class="mb-3">
+                        <label class="form-label" for="batchMintRecipients">آدرس‌های گیرنده (جداشده با کاما):</label>
+                        <input class="form-control" id="batchMintRecipients" placeholder="0x..., 0x..., ..."
+                               type="text"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="batchMintTokenIds">شناسه توکن ها (جداشده با کاما):</label>
+                        <input class="form-control" id="batchMintTokenIds" placeholder="1, 2, ..." type="text"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="batchMintAmounts">مقادیر توکن (جداشده با کاما):</label>
+                        <input class="form-control" id="batchMintAmounts" placeholder="10, 20, ..." type="text"/>
+                    </div>
+                    <button class="btn btn-primary" type="button" onclick="batchMint()">
+                        مینت دسته‌ای
+                    </button>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="batchBurn">
+                <h2 class="mt-3">سوزاندن دسته‌ای</h2>
+                <form id="batchBurnForm">
+
+
+                    <div class="mb-3">
+                        <label class="form-label" for="batchBurnTokenIds">شناسه توکن ها (جداشده با کاما):</label>
+                        <input class="form-control" id="batchBurnTokenIds" placeholder="1, 2, ..." type="text"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="batchBurnAmounts">مقادیر توکن (جداشده با کاما):</label>
+                        <input class="form-control" id="batchBurnAmounts" placeholder="10, 20, ..." type="text"/>
+                    </div>
+                    <button class="btn btn-danger" type="button" onclick="batchBurn()">
+                        سوزاندن دسته‌ای
+                    </button>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="curation">
+                <h2 class="mt-3">متعادل سازی محتوا</h2>
+                <form id="curationForm">
+
+
+                    <div class="mb-3">
+                        <label class="form-label" for="curationTokenId">شناسه توکن:</label>
+                        <input class="form-control" id="curationTokenId" min="0" type="number"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="curationData">دیتا (اختیاری):</label>
+                        <input class="form-control" id="curationData" type="text"/>
+                    </div>
+                    <button class="btn btn-primary" type="button" onclick="curateContent()">
+                        متعادل سازی محتوا
+                    </button>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="sale">
+                <h2 class="mt-3">فروش توکن</h2>
+                <form id="saleForm">
+
+
+                    <div class="mb-3">
+                        <label class="form-label" for="saleTokenId">شناسه توکن:</label>
+                        <input class="form-control" id="saleTokenId" min="0" type="number"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="salePrice">قیمت (ETH):</label>
+                        <input class="form-control" id="salePrice" min="0" type="number"/>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="saleData">دیتا (اختیاری):</label>
+                        <input class="form-control" id="saleData" type="text"/>
+                    </div>
+                    <button class="btn btn-success" type="button" onclick="executeSale()">
+                        فروش توکن
+                    </button>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="grantRole">
+                <h2 class="mt-3">تخصیص نقش</h2>
+                <form id="grantRoleForm">
+                    <div class="mb-3">
+                        <label for="grantRoleAccountAddress" class="form-label">آدرس حساب:</label>
+                        <input type="text" class="form-control" id="grantRoleAccountAddress" placeholder="0x..." />
+                    </div>
+                    <select class="form-select mb-3" id="grantRoleSelect">
+                        <option value="MINTER_ROLE">نقش Minter</option>
+                        <option value="ROYALTY_MANAGER_ROLE">نقش مدیریت حقوق</option>
+                        <option value="CONTENT_MANAGER_ROLE">نقش مدیریت محتوا</option>
+                        <!-- Add more role options as needed -->
+                    </select>
+                    <button type="button" class="btn btn-primary" onclick="grantRole()">تخصیص نقش</button>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="revokeRole">
+                <h2 class="mt-3">لغو نقش</h2>
+                <form id="revokeRoleForm">
+                    <div class="mb-3">
+                        <label for="revokeRoleAccountAddress" class="form-label">آدرس حساب:</label>
+                        <input type="text" class="form-control" id="revokeRoleAccountAddress" placeholder="0x..." />
+                    </div>
+                    <select class="form-select mb-3" id="revokeRoleSelect">
+                        <option value="MINTER_ROLE">نقش Minter</option>
+                        <option value="ROYALTY_MANAGER_ROLE">نقش مدیریت حقوق</option>
+                        <option value="CONTENT_MANAGER_ROLE">نقش مدیریت محتوا</option>
+                    </select>
+                    <button type="button" class="btn btn-danger" onclick="revokeRole()">لغو نقش</button>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="displayTokenData">
+                <h2 class="mt-3">نمایش اطلاعات توکن</h2>
+                <form id="displayTokenDataForm">
+                    <div class="mb-3">
+                        <label for="displayTokenId" class="form-label">شناسه توکن:</label>
+                        <input type="number" class="form-control" id="displayTokenId" min="0" />
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="displayTokenData()">نمایش اطلاعات توکن</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+<script src="web3.min.js"></script>
+<script src="ctoken.js"></script>
+</body>
+</html>

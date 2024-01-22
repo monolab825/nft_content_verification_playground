@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>آزمایشگاه توکن هویت</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="web3.min.js"></script>
+</head>
+
+<body>
+  <header class="bg-light p-3 text-center">
+    <h1>رابط آزمایش توکن هویت</h1>
+    <div id="currentAccount"></div>
+  </header>
+
+  <main class="container mt-3 mb-5">
+    <div id="statusBar" class="bg-dark text-light" style="
+          margin: 10px;
+          padding: 10px;
+          min-height: 50px;
+          border-radius: 10px;
+          direction: ltr;
+        "></div>
+    <div class="d-flex" style="flex-direction: row-reverse; justify-content: space-between">
+
+      <div class="list-group" id="mainTabs">
+        <a href="#readNFT" class="list-group-item list-group-item-action active" id="readNFT-tab" data-bs-toggle="list"
+          role="tab">
+          خواندن جزئیات توکن هویت
+        </a>
+        <a href="#mintNFT" class="list-group-item list-group-item-action" id="mintNFT-tab" data-bs-toggle="list"
+          role="tab">
+          ایجاد توکن هویت جدید
+        </a>
+        <a href="#updateNFT" class="list-group-item list-group-item-action" id="updateNFT-tab" data-bs-toggle="list"
+          role="tab">
+          به‌روزرسانی خصوصیات توکن هویت
+        </a>
+        <a href="#claimManagement" class="list-group-item list-group-item-action" id="claimManagement-tab"
+          data-bs-toggle="list" role="tab">
+          مدیریت ادعا‌ها
+        </a>
+        <a href="#keyManagement" class="list-group-item list-group-item-action" id="keyManagement-tab"
+          data-bs-toggle="list" role="tab">
+          مدیریت کلیدها
+        </a>
+        <a href="#roleManagement" class="list-group-item list-group-item-action" id="roleManagement-tab"
+          data-bs-toggle="list" role="tab">
+          مدیریت نقش‌ها
+        </a>
+      </div>
+
+
+      <div class="tab-content m-3 flex-grow-1">
+        <div class="tab-pane fade show active" id="readNFT">
+          <hr />
+          <h2 class="h4">خواندن جزئیات توکن هویت</h2>
+          <div class="mb-3">
+            <label for="tokenId" class="form-label">شناسه توکن هویت را وارد کنید:</label>
+            <input type="number" class="form-control" id="tokenId" min="0" />
+          </div>
+          <button class="btn btn-primary" onclick="getNFTDetails()">
+            دریافت جزئیات
+          </button>
+        </div>
+
+        <div class="tab-pane fade" id="mintNFT">
+
+          <hr />
+          <h2 class="h4">ایجاد توکن هویت جدید</h2>
+
+          <form>
+            <div class="mb-3">
+              <label for="to" class="form-label">آدرس گیرنده:</label>
+              <input type="text" class="form-control" id="to" />
+            </div>
+            <div class="mb-3">
+              <label for="newTokenId" class="form-label">شناسه جدید توکن هویت:</label>
+              <input type="number" class="form-control" id="newTokenId" min="0" />
+            </div>
+            <div class="mb-3">
+              <label for="uri" class="form-label">آدرس URI توکن هویت:</label>
+              <input type="text" class="form-control" id="uri" />
+            </div>
+            <div class="mb-3">
+              <label for="didDocumentUri" class="form-label">آدرس URI سند DID:</label>
+              <input type="text" class="form-control" id="didDocumentUri" />
+            </div>
+            <div class="mb-3">
+              <label for="initialWeight" class="form-label">وزن اولیه:</label>
+              <input type="number" class="form-control" id="initialWeight" min="0" />
+            </div>
+            <div class="mb-3">
+              <label for="initialDecayRate" class="form-label">نرخ پوسیدگی:</label>
+              <input type="number" class="form-control" id="initialDecayRate" min="0" />
+            </div>
+            <button type="button" class="btn btn-primary" onclick="mintNFT()">
+              ایجاد توکن هویت
+            </button>
+          </form>
+          <hr />
+          <br />
+          <h2 class="h4">حذف توکن هویت</h2>
+          <form>
+            <div class="mb-3">
+              <label for="burnTokenId" class="form-label">شناسه توکن هویت برای حذف:</label>
+              <input type="number" class="form-control" id="burnTokenId" min="0" />
+            </div>
+            <button type="button" class="btn btn-danger" id="burnNFTButton" onclick="burnNFT()">
+              حذف توکن هویت
+            </button>
+          </form>
+        </div>
+
+        <div class="tab-pane fade" id="updateNFT">
+          <hr />
+          <h2 class="h4">به‌روزرسانی خصوصیات توکن هویت</h2>
+
+          <form>
+            <div class="mb-3">
+              <label for="updateTokenId" class="form-label">شناسه توکن هویت:</label>
+              <input type="number" class="form-control" id="updateTokenId" min="0" />
+            </div>
+            <div class="mb-3">
+              <label for="newWeight" class="form-label">وزن جدید:</label>
+              <input type="number" class="form-control" id="newWeight" min="0" />
+            </div>
+            <div class="mb-3">
+              <label for="newDecayRate" class="form-label">نرخ کاهش جدید:</label>
+              <input type="number" class="form-control" id="newDecayRate" min="0" />
+            </div>
+            <button type="button" class="btn btn-primary" onclick="updateNFTAttributes()">
+              به‌روزرسانی خصوصیات
+            </button>
+          </form>
+        </div>
+
+        <div class="tab-pane fade" id="claimManagement">
+          <h2 class="h4">مدیریت ادعا‌ها</h2>
+
+          <form>
+            <h2 class="h4">افزودن ادعا</h2>
+            <div class="mb-3">
+              <label for="addClaimTokenId" class="form-label">شناسه توکن هویت:</label>
+              <input type="number" class="form-control" id="addClaimTokenId" min="0" />
+            </div>
+            <div class="mb-3">
+              <label for="claimType" class="form-label">نوع ادعا:</label>
+              <select class="form-control" id="claimType">
+                <option value="1">Profile Claim</option>
+                <option value="2">Post Access Claim</option>
+                <option value="3">Message Access Claim</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="claimScheme" class="form-label">طرح ادعا:</label>
+              <input type="number" class="form-control" id="claimScheme" min="0" />
+            </div>
+            <div class="mb-3">
+              <label for="issuer" class="form-label">نشانی صادر کننده:</label>
+              <input type="text" class="form-control" id="issuer" />
+            </div>
+            <div class="mb-3">
+              <label for="signature" class="form-label">امضا:</label>
+              <input type="text" class="form-control" id="signature" />
+            </div>
+            <div class="mb-3">
+              <label for="claimData" class="form-label">داده‌های ادعا:</label>
+              <input type="text" class="form-control" id="claimData" />
+            </div>
+            <div class="mb-3">
+              <label for="claimUri" class="form-label">URI ادعا:</label>
+              <input type="text" class="form-control" id="claimUri" />
+            </div>
+            <button type="button" class="btn btn-primary" onclick="addClaim()">
+              افزودن ادعا
+            </button>
+          </form>
+          <hr />
+          <br />
+          <form>
+            <h2 class="h4">حذف کلید</h2>
+            <div class="mb-3">
+              <label for="removeClaimId" class="form-label">شناسه ادعا:</label>
+              <input type="text" class="form-control" id="removeClaimId" />
+            </div>
+            <div class="mb-3">
+              <label for="removeClaimTokenId" class="form-label">شناسه توکن هویت:</label>
+              <input type="number" class="form-control" id="removeClaimTokenId" min="0" />
+            </div>
+            <button type="button" class="btn btn-danger" onclick="removeClaim()">
+              حذف ادعا
+            </button>
+          </form>
+
+          <div id="claimsList" class="mt-3 bg-dark text-light text-start" style="direction: ltr"></div>
+        </div>
+
+        <div class="tab-pane fade" id="keyManagement">
+          <h2 class="h4">مدیریت کلید ها</h2>
+
+          <form>
+            <h2 class="h4">افزودن کلید</h2>
+            <div class="mb-3">
+              <label for="addKeyId" class="form-label">شناسه توکن هویت:</label>
+              <input type="number" class="form-control" id="addKeyId" min="0" />
+            </div>
+            <div class="mb-3">
+              <label for="keyPurpose" class="form-label">هدف کلید:</label>
+              <input type="number" class="form-control" id="keyPurpose" min="0" />
+            </div>
+            <div class="mb-3">
+              <label for="keyType" class="form-label">نوع کلید:</label>
+              <select class="form-control" id="keyType">
+                <option value="1" selected>Authentication Key</option>
+                <option value="2">Encryption Key</option>
+                <option value="3">Signing Key</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="keyData" class="form-label">داده کلید:</label>
+              <input type="text" class="form-control" id="keyData" />
+            </div>
+            <button type="button" class="btn btn-primary" onclick="addKey()">
+              افزودن کلید
+            </button>
+          </form>
+          <hr />
+          <br />
+          <form>
+            <h2 class="h4">حذف کلید</h2>
+            <div class="mb-3">
+              <label for="removeKeyId" class="form-label">شناسه کلید:</label>
+              <input type="text" class="form-control" id="removeKeyId" />
+            </div>
+            <div class="mb-3">
+              <label for="removeKeyTokenId" class="form-label">شناسه توکن هویت:</label>
+              <input type="number" class="form-control" id="removeKeyTokenId" min="0" />
+            </div>
+            <button type="button" class="btn btn-danger" onclick="removeKey()">
+              حذف کلید
+            </button>
+          </form>
+
+          <div id="keysList" class="mt-3 bg-dark text-light text-start" style="direction: ltr"></div>
+        </div>
+
+        <div class="tab-pane fade" id="roleManagement">
+          <h2 class="h4">مدیریت نقش‌ها</h2>
+
+          <form>
+            <h2 class="h4">اعطای نقش</h2>
+            <div class="mb-3">
+              <label for="grantRoleAddress" class="form-label">آدرس کاربر:</label>
+              <input type="text" class="form-control" id="grantRoleAddress" />
+            </div>
+            <div class="mb-3">
+              <label for="grantRoleName" class="form-label">نام نقش:</label>
+              <select class="form-control" id="grantRoleName">
+                <option value="IDENTITY_ADMIN_ROLE">
+                  IDENTITY_ADMIN_ROLE
+                </option>
+                <option value="CLAIM_ISSUER_ROLE">CLAIM_ISSUER_ROLE</option>
+                <option value="DEFAULT_ADMIN_ROLE">DEFAULT_ADMIN_ROLE</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="grantRole()">
+              اعطای نقش
+            </button>
+          </form>
+          <hr />
+          <br />
+          <form>
+            <h2 class="h4">لغو نقش</h2>
+            <div class="mb-3">
+              <label for="revokeRoleAddress" class="form-label">آدرس کاربر:</label>
+              <input type="text" class="form-control" id="revokeRoleAddress" />
+            </div>
+            <div class="mb-3">
+              <label for="revokeRoleName" class="form-label">نام نقش:</label>
+              <select class="form-control" id="revokeRoleName">
+                <option value="IDENTITY_ADMIN_ROLE">
+                  IDENTITY_ADMIN_ROLE
+                </option>
+                <option value="CLAIM_ISSUER_ROLE">CLAIM_ISSUER_ROLE</option>
+                <option value="DEFAULT_ADMIN_ROLE">DEFAULT_ADMIN_ROLE</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-danger" onclick="revokeRole()">
+              لغو نقش
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+  <script src="itoken.js"></script>
+</body>
+
+</html>
