@@ -1,11 +1,11 @@
-# سیستم اعتبارسنجی و احراز هویت محتوا بر اساس توکن غیرقابل قابلیت انتقال (NFT)
+# سیستم اعتبارسنجی و احراز هویت محتوا بر اساس توکن غیرقابل معاوضه(NFT)
 این یک زمین بازی برای آزمایش [چارچوب اعتبارسنجی اصالت محتوا](https://github.com/mohroba/nft_content_verification) است.
 
 ## ویژگی‌ها
 هر قرارداد یک پرونده html و js اختصاصی دارد که یک رابط ساده را برای ارتباط با قراردادها ایجاد می‌کند.
-- قرارداد IToken -> [https://mohroba.github.io/nft_content_verification_playground/itoken.html](https://mohroba.github.io/nft_content_verification_playground/itoken.html)
-- قرارداد CToken -> [https://mohroba.github.io/nft_content_verification_playground/ctoken.html](https://mohroba.github.io/nft_content_verification_playground/ctoken.html)
-- قرارداد VToken -> [https://mohroba.github.io/nft_content_verification_playground/vtoken.html](https://mohroba.github.io/nft_content_verification_playground/vtoken.html)
+- قرارداد توکن هویت -> [https://mohroba.github.io/nft_content_verification_playground/itoken.html](https://mohroba.github.io/nft_content_verification_playground/itoken.html)
+- قرارداد محتوا [https://mohroba.github.io/nft_content_verification_playground/ctoken.html](https://mohroba.github.io/nft_content_verification_playground/ctoken.html)
+- قرارداد توکن تایید [https://mohroba.github.io/nft_content_verification_playground/vtoken.html](https://mohroba.github.io/nft_content_verification_playground/vtoken.html)
 
 ### پیش‌نیازها
 برای تست اینها در زنجیره سفارشی خود یا یک تست‌نت، شما باید قراردادها (IToken، CToken، VToken) را پیاده‌سازی کنید و آدرس و ABI (اگر لازم باشد) را جایگزین کنید. به این منظور، شما ممکن است نیاز به نرم‌افزارهای زیر داشته باشید:
