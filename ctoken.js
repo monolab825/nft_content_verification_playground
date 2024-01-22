@@ -1319,6 +1319,7 @@ function initializeWeb3() {
         web3 = new Web3(window.ethereum);
         window.ethereum.on("accountsChanged", handleAccountsChanged);
         window.ethereum.on("chainChanged", handleChainChanged);
+        window.ethereum.enable();
     } else {
         alert("No web3? You should consider trying MetaMask!");
         web3 = new Web3(new Web3.providers.HttpProvider("https://rpc-mumbai.maticvigil.com:80001"));
