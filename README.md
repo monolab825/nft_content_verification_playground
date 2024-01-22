@@ -28,5 +28,6 @@ Special thanks to the following open-source projects:
 - [OpenZeppelin](https://openzeppelin.com/): For providing valuable smart contract libraries and tools.
 - [Hardhat](https://hardhat.org/): A powerful development environment for Ethereum smart contracts.
 - [Web3.js](https://web3js.org/): Best development library for JavaScript.
+- [Bootstrap](https://getbootstrap.com/): One the Best front-end libraries.
 
 We are also grateful to the broader blockchain and open-source community for their continuous support and inspiration.
