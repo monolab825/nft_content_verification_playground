@@ -3,9 +3,9 @@ This is a playground for testing the  [content authenticity verification framewo
 
 ## Features
 Each contract has a dedicated html and js file that forms a simple interface to interact with contracts.
-IToken Contract : https://mohroba.github.io/nft_content_verification_playground/itoken.html
-CToken Contract : https://mohroba.github.io/nft_content_verification_playground/ctoken.html
-VToken Contract : https://mohroba.github.io/nft_content_verification_playground/vtoken.html
+- IToken Contract -> https://mohroba.github.io/nft_content_verification_playground/itoken.html
+- CToken Contract -> https://mohroba.github.io/nft_content_verification_playground/ctoken.html
+- VToken Contract -> https://mohroba.github.io/nft_content_verification_playground/vtoken.html
 
 ### Prerequisites
 To test these on your own custom chain or a test-net , you need to deploy the Contracts (IToken,CToken,VToken) and replace the address and ABI (if neceesary). For that matter, you might need following softwares :
