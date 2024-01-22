@@ -4,8 +4,8 @@
 ## ویژگی‌ها
 هر قرارداد یک پرونده html و js اختصاصی دارد که یک رابط ساده را برای ارتباط با قراردادها ایجاد می‌کند.
 - قرارداد توکن هویت -> [https://mohroba.github.io/nft_content_verification_playground/itoken.html](https://mohroba.github.io/nft_content_verification_playground/itoken.html)
-- قرارداد محتوا [https://mohroba.github.io/nft_content_verification_playground/ctoken.html](https://mohroba.github.io/nft_content_verification_playground/ctoken.html)
-- قرارداد توکن تایید [https://mohroba.github.io/nft_content_verification_playground/vtoken.html](https://mohroba.github.io/nft_content_verification_playground/vtoken.html)
+- قرارداد محتوا -> [https://mohroba.github.io/nft_content_verification_playground/ctoken.html](https://mohroba.github.io/nft_content_verification_playground/ctoken.html)
+- قرارداد توکن تایید -> [https://mohroba.github.io/nft_content_verification_playground/vtoken.html](https://mohroba.github.io/nft_content_verification_playground/vtoken.html)
 
 ### پیش‌نیازها
 برای تست اینها در زنجیره سفارشی خود یا یک تست‌نت، شما باید قراردادها (IToken، CToken، VToken) را پیاده‌سازی کنید و آدرس و ABI (اگر لازم باشد) را جایگزین کنید. به این منظور، شما ممکن است نیاز به نرم‌افزارهای زیر داشته باشید:
