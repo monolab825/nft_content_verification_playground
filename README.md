@@ -18,7 +18,7 @@
 ## قدردانی
 ما می‌خواهیم از افراد، سازمان‌ها و پروژه‌های زیر صمیمانه سپاسگزاری کنیم که به توسعه این پروژه کمک کرده‌اند:
 
-- **دانشگاه بین‌المللی امام خمینی (ره):** دانشکده مهندسی کامپیوتر.
+- **دانشگاه بین‌المللی امام خمینی (ره):** گروه مهندسی کامپیوتر.
 - **دکتر حمیدرضا حمیدی:** استاد دانشگاه [@IKIU](https://ikiu.ac.ir/) و راهنمای پروژه.
 
 سپاس ویژه از پروژه‌های متن‌باز زیر:
@@ -52,7 +52,7 @@ Also remember that playground works with any Web3 supported wallet (Metamask pre
 
 I would like to express our sincere appreciation to the following individuals, organizations, and projects that have contributed to the development this project:
 
-- **IKIU:** Imam Khomeini International University (Faculty of Computer Engineering).
+- **IKIU:** Imam Khomeini International University (Computer Engineering Department).
 - **Dr.HamidReza Hamidi:** Professor [@IKIU](https://ikiu.ac.ir/) & Supervisor of the project.
 
 
