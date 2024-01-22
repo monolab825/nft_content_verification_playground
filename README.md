@@ -1,5 +1,5 @@
 # NFT Based Content Authenticity & Verification System
-This is a playground for testing the  [content authenticity verification framework]([https://ikiu.ac.ir/](https://github.com/mohroba/nft_content_verification))
+This is a playground for testing the  [content authenticity verification framework](https://github.com/mohroba/nft_content_verification)
 
 ## Features
 Each contract has a dedicated html and js file that forms a simple interface to interact with contracts.
