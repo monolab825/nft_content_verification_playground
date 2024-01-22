@@ -4,7 +4,7 @@ var contract;
 var validationMap = {};
 
 // Contract address and ABI
-const contractAddress = "0x1Fb2266B6A6dfFF9877C586f092e1D69fB7cBAa7";
+const contractAddress = "0xA17C03207075417d178d7CbC28Aed94A41bE73ac";
 const contractABI = [
   {
     "inputs": [

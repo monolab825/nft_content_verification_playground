@@ -1,7 +1,7 @@
 var accounts = [];
 var currentAccount = "";
 var contract;
-const contractAddress = "0xD80a5152624773b07eE1A7C07965faD44e78654f";
+const contractAddress = "0xc26D11FbD9Cfa9BD54451D1e0522987FEB0b2604";
 const contractABI = [
     {
         "inputs": [

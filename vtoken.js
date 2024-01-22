@@ -3,7 +3,7 @@ var currentAccount = "";
 var contract;
 var validationMap = {};
 
-const contractAddress = "0xD80a5152624773b07eE1A7C07965faD44e78654f";
+const contractAddress = "0x052C80103eCf8D72C69564f2cc2B279F15c36fb0";
 const contractABI = [
   {
     "inputs": [
